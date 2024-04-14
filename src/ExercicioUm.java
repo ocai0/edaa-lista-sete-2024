@@ -2,15 +2,15 @@ import java.util.Stack;
 
 class ExercicioUm {
     public static void resolve() {
-        ExercicioUm.resolveA("ESTE EXERCÍCIO É MUITO FÁCIL");
-        System.err.println("");
-        ExercicioUm.resolveB("Abba");
-        ExercicioUm.resolveB("ovo");
-        ExercicioUm.resolveB("ovos");
-        System.err.println("");
+        // ExercicioUm.resolveA("ESTE EXERCÍCIO É MUITO FÁCIL");
+        // System.err.println("");
+        // ExercicioUm.resolveB("Abba");
+        // ExercicioUm.resolveB("ovo");
+        // ExercicioUm.resolveB("ovos");
+        // System.err.println("");
         int[] numbers = { 34, 3, 31, 98, 92, 23 };
-        ExercicioUm.resolveC(numbers);
-        System.err.println("");
+        // ExercicioUm.resolveC(numbers);
+        // System.err.println("");
         ExercicioUm.resolveD(numbers);
         System.err.println("");
 
@@ -42,9 +42,12 @@ class ExercicioUm {
     }
 
     public static void resolveD(int[] numbers) {
-        Stack<Integer> stack = new Stack<Integer>();
+        Pilha pilha = new Pilha();
         for (int i : numbers)
-            stack.push(i);
+            pilha.empilhar(i);
+
+        System.out.printf("Maior: %d\nMenor: %d\nMedia: %d", pilha.maiorItem(), pilha.menorItem(),
+                pilha.mediaAritmetica());
 
     }
 
