@@ -2,12 +2,17 @@ import java.util.Stack;
 
 class ExercicioUm {
     public static void resolve() {
-        // ExercicioUm.resolveA("ESTE EXERCÍCIO É MUITO FÁCIL");
-        // ExercicioUm.resolveB("Abba");
-        // ExercicioUm.resolveB("ovo");
-        // ExercicioUm.resolveB("ovos");
-        int[] numbers = { 1, 4, 8, 5, 6, 3, 3, 2, 1, 9, 7 };
+        ExercicioUm.resolveA("ESTE EXERCÍCIO É MUITO FÁCIL");
+        System.err.println("");
+        ExercicioUm.resolveB("Abba");
+        ExercicioUm.resolveB("ovo");
+        ExercicioUm.resolveB("ovos");
+        System.err.println("");
+        int[] numbers = { 34, 3, 31, 98, 92, 23 };
         ExercicioUm.resolveC(numbers);
+        System.err.println("");
+        ExercicioUm.resolveD(numbers);
+        System.err.println("");
 
     }
 
@@ -27,19 +32,20 @@ class ExercicioUm {
     }
 
     public static void resolveC(int[] numbers) {
-        StackOrdered stack = new StackOrdered();
-        stack.push(34);
-        stack.push(3);
-        stack.push(31);
-        stack.push(98);
-        stack.push(92);
-        stack.push(23);
+        StackOrdered stack = new StackOrdered(false);
+        for (int i : numbers)
+            stack.push(i);
+        stack.arrangeDescending();
         while (!stack.empty()) {
             System.out.println(stack.pop());
         }
     }
 
-    public static void resolveD() {
+    public static void resolveD(int[] numbers) {
+        Stack<Integer> stack = new Stack<Integer>();
+        for (int i : numbers)
+            stack.push(i);
+
     }
 
     public static String invertWord(String word) {
@@ -60,19 +66,27 @@ class ExercicioUm {
 
 class StackOrdered {
     Stack<Integer> stack;
+    boolean autoSort = false;;
 
     public StackOrdered() {
         this.stack = new Stack<Integer>();
     }
 
+    public StackOrdered(boolean autoSort) {
+        this.stack = new Stack<Integer>();
+        this.autoSort = autoSort;
+    }
+
     public void push(int number) {
         stack.add(number);
+        if (!autoSort)
+            return;
         this.arrangeAscending();
         // this.arrangeDescending();
 
     }
 
-    private void arrangeDescending() {
+    public void arrangeDescending() {
         Stack<Integer> tempStack = new Stack<Integer>();
         int temp;
         while (!stack.empty()) {
@@ -84,14 +98,14 @@ class StackOrdered {
         this.stack = tempStack;
     }
 
-    private void arrangeAscending() {
+    public void arrangeAscending() {
         Stack<Integer> tempStack = new Stack<Integer>();
-        int temp;
         while (!stack.empty()) {
-            temp = stack.pop();
-            while (!tempStack.empty() && tempStack.firstElement() < temp)
-                stack.add(tempStack.pop());
-            tempStack.add(temp);
+            int temp = stack.pop();
+            while (!tempStack.empty() && tempStack.peek() < temp) {
+                stack.push(tempStack.pop());
+            }
+            tempStack.push(temp);
         }
         this.stack = tempStack;
     }
